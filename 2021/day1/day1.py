@@ -19,11 +19,10 @@ def count_measurement_increments(input):
 def count_window_increments(input):
 
     window_size = 3
-
     counter = 0
     rolling_sum = sum(input[:window_size])
 
-    for i in range(3, len(input)):
+    for i in range(window_size, len(input)):
         prev_sum = rolling_sum
         rolling_sum -= input[i-window_size]
         rolling_sum += input[i]
