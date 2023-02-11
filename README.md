@@ -1,4 +1,4 @@
 Advent of code
 ========
 
-Solution to avent of code problems divided by year.
+Solutions to advent of code problems divided by year.
