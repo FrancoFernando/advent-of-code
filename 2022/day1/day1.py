@@ -1,28 +1,31 @@
-def parse_input():
-    with open("2022/day1/input.txt", 'r') as file:
+class Solution:
 
-        calories = [0]
-        
-        for line in file:
+    def __init__(self):
+        self.calories = []
+        self.parse_input()
+
+    def parse_input(self):
+        with open("2022/day1/input.txt", 'r') as file:
+
+            self.calories.append(0)
             
-            if line.strip():
-                calories[-1] += int(line.strip())
-            else:
-                calories.append(0)
+            for line in file:
+                
+                if line.strip():
+                    self.calories[-1] += int(line.strip())
+                else:
+                    self.calories.append(0)
+    
+    def part_one(self):
+        result = max(self.calories)
+        print(result)
 
-    return calories
-
-def part_one(calories):
-
-    result = max(calories)
-    print(result)
-
-def part_two(calories):
-    result = sum(sorted(calories, reverse=True)[:3])
-    print(result)
+    def part_two(self):
+        result = sum(sorted(self.calories, reverse=True)[:3])
+        print(result)
 
 if __name__ == '__main__':
-    calories = parse_input()
-    part_one(calories)
-    part_two(calories)
+    day1 = Solution() 
+    day1.part_one()
+    day1.part_two()
             
