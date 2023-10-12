@@ -1,22 +1,17 @@
 with open("2022/day1/input.txt", 'r') as file:
 
-    calories_per_elf = []
-    calories = 0
+    calories = [0]
     
     for line in file:
         
         if line.strip():
-            calories += int(line.strip())
+            calories[-1] += int(line.strip())
         else:
-            calories_per_elf.append(calories)
-            calories = 0
+            calories.append(0)
 
-    if calories != 0:
-        calories_per_elf.append(calories)
-
-    result = max(calories_per_elf)
+    result = max(calories)
     print(result)
 
-    result = sum(sorted(calories_per_elf, reverse=True)[:3])
+    result = sum(sorted(calories, reverse=True)[:3])
     print(result)
             
