@@ -9,13 +9,7 @@ rules = {'rock-rock':'draw','rock-paper':'win','rock-scissors':'lose',
 
 def parse_input():
     with open("2022/day2/input.txt", 'r') as file:
-
-        input = []
-
-        for line in file:
-            input.append(line.split())
-
-    return input
+        return [line.split() for line in file]
 
 def part_one(input):
     result = 0
