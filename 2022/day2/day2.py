@@ -13,8 +13,7 @@ def parse_input():
         input = []
 
         for line in file:
-            opponent, our = line.split()
-            input.append((opponent, our))
+            input.append(line.split())
 
     return input
 
