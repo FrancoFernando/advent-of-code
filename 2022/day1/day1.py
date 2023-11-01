@@ -1,3 +1,5 @@
+import os
+
 class Solution:
 
     def __init__(self):
@@ -5,7 +7,7 @@ class Solution:
         self.parse_input()
 
     def parse_input(self):
-        with open("2022/day1/input.txt", 'r') as file:
+        with open(os.path.join(os.path.dirname(__file__),'input.txt'), 'r') as file:
 
             self.calories.append(0)
             

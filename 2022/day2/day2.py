@@ -1,3 +1,5 @@
+import os
+
 class Solution:
 
     score_per_shape = {'rock':1, 'paper':2, 'scissors':3}
@@ -17,7 +19,7 @@ class Solution:
         self.input = self.parse_input()
 
     def parse_input(self):
-        with open("2022/day2/input.txt", 'r') as file:
+        with open(os.path.join(os.path.dirname(__file__),'input.txt'), 'r') as file:
             return [line.split() for line in file]
 
     def part_one(self):
