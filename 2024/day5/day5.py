@@ -5,6 +5,8 @@ class Solution:
     def __init__(self):
         self.rules = defaultdict(set)
         self.updates = []
+        self.valid_updates = []
+        self.invalid_updates = []
         self.parse_input()
 
     def parse_input(self):
@@ -44,7 +46,7 @@ class Solution:
 
 
     def part_one(self): 
-        valid_updates = []
+
         result = 0
     
         for update in self.updates:
@@ -54,47 +56,43 @@ class Solution:
             if sorted_pages == update:
                 mid_index = len(update) // 2
                 result += update[mid_index]
-                valid_updates.append(update)
+                self.valid_updates.append(update)
+            else:
+                self.invalid_updates.append(update)
 
         print(result)
-        return valid_updates
+        return result
     
     def order_update(self, update):
-        subgraph = {page: self.rules[page].intersection(set(update)) for page in update}
-        sorted_pages = self.topological_sort(subgraph, update)
         
-        if sorted_pages:
-            return sorted_pages
-        else:
-            # If topological sort fails, use a greedy approach
-            remaining = set(update)
-            ordered = []
-            while remaining:
-                # Find a page that has no predecessors in the remaining set
-                for page in remaining:
-                    if not any(pred in remaining for pred in self.rules if page in self.rules[pred]):
-                        ordered.append(page)
-                        remaining.remove(page)
-                        break
-                else:
-                    # If no such page is found, we have a cycle. Break it arbitrarily.
-                    page = remaining.pop()
+        # If topological sort fails, use a greedy approach
+        remaining = set(update)
+        ordered = []
+        while remaining:
+            # Find a page that has no predecessors in the remaining set
+            for page in remaining:
+                if not any(pred in remaining for pred in self.rules if page in self.rules[pred]):
                     ordered.append(page)
-            return ordered
+                    remaining.remove(page)
+                    break
+            else:
+                # If no such page is found, we have a cycle. Break it arbitrarily.
+                page = remaining.pop()
+                ordered.append(page)
+
+        return ordered
     
     def part_two(self):
-        reordered = []
         result = 0
-        for update in self.updates:
+
+        for update in self.invalid_updates:
             reordered_update = self.order_update(update)
-            reordered.append(reordered_update)
             mid_index = len(reordered_update) // 2
-            result += update[mid_index]
+            result += reordered_update[mid_index]
+
         print(result)
-        return reordered
+        return result
         
-
-
 if __name__ == '__main__':
     day1 = Solution() 
     day1.part_one()
